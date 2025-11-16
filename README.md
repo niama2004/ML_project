@@ -1,1100 +1,445 @@
 # 📊 Customer Churn Prediction System
 
-> An end-to-end machine learning solution for predicting customer churn in telecommunications, featuring an optimized ML pipeline, RESTful API, and interactive dashboard.
+<div align="center">
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.68+-green.svg)](https://fastapi.tiangolo.com/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.0+-red.svg)](https://streamlit.io/)
-[![License](https://img.shields.io/badge/License-Educational-yellow.svg)](LICENSE)
+**A comprehensive machine learning solution for predicting customer churn in telecommunications**
+
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)](https://streamlit.io/)
+[![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.3+-orange.svg)](https://scikit-learn.org/)
+
+**Version 2.0** | **Production Ready** | **With Smart Recommendations**
+
+</div>
 
 ---
 
 ## 🎯 Project Overview
 
-### What This Project Does
+This project implements an end-to-end machine learning pipeline for predicting customer churn in telecommunications. The system uses optimized preprocessing, feature engineering, and ensemble methods to achieve high prediction accuracy while providing actionable business recommendations.
 
-This comprehensive machine learning system predicts customer churn with high accuracy and provides actionable business recommendations. The system has been optimized for real-world deployment with a focus on usability and performance.
-
-### Key Highlights
-
-- ✨ **Simplified Input**: Only 6 critical features required (instead of 18)
-- 💡 **Smart Recommendations**: Automatic actionable recommendations based on predictions
-- 🎯 **Optimized Model**: Hyperparameter tuning, feature engineering, optimal threshold
-- 🚀 **Production Ready**: Complete deployment pipeline with API and dashboard
-- 📊 **Advanced Analytics**: Comprehensive visualizations and insights
-
----
-
-## 📋 Table of Contents
-
-- [Quick Start](#-quick-start)
-- [Project Structure](#-project-structure)
-- [Key Features](#-key-features)
-- [Installation](#-installation)
-- [Usage Guide](#-usage-guide)
-- [API Documentation](#-api-documentation)
-- [Machine Learning Pipeline](#-machine-learning-pipeline)
-- [Model Performance](#-model-performance)
-- [Business Insights](#-business-insights)
-- [Technical Details](#-technical-details)
+**Key Features:**
+- **Simplified Input**: Only 6 critical features required (reduced from 21)
+- **Smart Recommendations**: Automatic actionable suggestions to reduce churn risk
+- **Production-Ready API**: FastAPI backend with comprehensive validation
+- **Interactive Dashboard**: Streamlit frontend for non-technical users
 
 ---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-
-Before you begin, ensure you have:
-
 - Python 3.8 or higher
 - pip package manager
-- Basic understanding of machine learning concepts
 
 ### Installation
 
 ```bash
-# 1. Navigate to project directory
+# 1. Clone or download the project
 cd copie-ml
 
-# 2. Create a virtual environment
+# 2. Create virtual environment
 python -m venv venv
 
 # 3. Activate virtual environment
-# On Windows:
+# Windows:
 venv\Scripts\activate
-
-# On Linux/Mac:
+# Linux/Mac:
 source venv/bin/activate
 
-# 4. Install all dependencies
+# 4. Install dependencies
 pip install -r requirements.txt
 ```
 
 ### Running the Application
 
-**Terminal 1 - API Server:**
 ```bash
+# Terminal 1: Start the API server
 uvicorn backend_improved:app --reload
-```
 
-**Terminal 2 - Dashboard:**
-```bash
+# Terminal 2: Start the dashboard
 streamlit run frontend_improved.py
 ```
 
-### Access Points
-
-| Service | URL | Description |
-|---------|-----|-------------|
-| 🌐 **Dashboard** | http://localhost:8501 | Interactive web interface |
-| 📡 **API** | http://localhost:8000 | REST API endpoint |
-| 📚 **API Docs** | http://localhost:8000/docs | Swagger documentation |
+**Access Points:**
+- 🌐 **API**: http://localhost:8000
+- 📚 **API Docs**: http://localhost:8000/docs
+- 🎨 **Dashboard**: http://localhost:8501
 
 ---
 
-## 📁 Project Structure
+## 📊 Dataset
 
-```
-copie-ml/
-│
-├── 📓 Notebooks/
-│   ├── ml1.ipynb                              # Original ML pipeline
-│   └── ml1_improved.ipynb                     # ⭐ Optimized pipeline
-│
-├── 🔧 Backend/
-│   ├── backend.py                             # Original FastAPI server
-│   └── backend_improved.py                    # ⭐ Enhanced API with recommendations
-│
-├── 🎨 Frontend/
-│   ├── frontend.py                            # Original Streamlit dashboard
-│   └── frontend_improved.py                   # ⭐ Enhanced UX dashboard
-│
-├── 📊 Data & Models/
-│   ├── Customer-Churn.csv                     # Dataset (7,043 customers)
-│   ├── churn_prediction_model.pkl             # Original model
-│   ├── churn_prediction_model_improved.pkl    # ⭐ Optimized model
-│   ├── scaler_improved.pkl                    # Feature scaler
-│   ├── feature_columns_improved.pkl           # Feature definitions
-│   └── optimal_threshold.pkl                  # ⭐ Optimal decision threshold
-│
-├── 📚 Documentation/
-│   ├── README.md                              # This file
-│   ├── GUIDE_UTILISATION_IMPROVED.md          # Detailed usage guide
-│   ├── ANALYSE_AMELIORATIONS.md               # Technical improvements
-│   └── ameliorations_code.py                  # Reusable functions
-│
-└── ⚙️ Configuration/
-    └── requirements.txt                       # Python dependencies
-```
+**Source**: Telco Customer Churn Dataset (Kaggle)
 
-**⭐ = Recommended/Improved versions**
+**Characteristics:**
+- **Size**: 7,043 customers
+- **Original Features**: 21 columns
+- **Target Variable**: Churn (Yes/No)
+- **Class Distribution**: 
+  - No Churn: 5,174 (73.46%)
+  - Churn: 1,869 (26.54%)
 
----
-
-## ✨ Key Features
-
-### 🎯 1. Simplified Input System
-
-**Only 6 critical features required** for predictions:
-
-| Feature | Type | Description |
-|---------|------|-------------|
-| `tenure` | Numeric | Months with company |
-| `MonthlyCharges` | Numeric | Monthly billing amount ($) |
-| `TotalCharges` | Numeric | Total charges ($) |
-| `Contract` | Categorical | Contract type |
-| `InternetService` | Categorical | Internet service type |
-| `PaymentMethod` | Categorical | Payment method |
-
-All other fields are optional with sensible defaults.
-
-### 💡 2. Smart Recommendations Engine
-
-The system automatically generates prioritized recommendations:
-
-#### Risk-Based Recommendations
-
-- 🔴 **High Priority** (>70% churn risk)
-  - Offer long-term contracts with discounts
-  - Implement new customer retention programs
-  - Immediate customer success outreach
-
-- 🟡 **Medium Priority** (30-70% churn risk)
-  - Encourage automatic payment enrollment
-  - Review pricing and service bundle options
-  - Quarterly satisfaction surveys
-
-- 🟢 **Low Priority** (<30% churn risk)
-  - Maintain standard service quality
-  - Annual check-ins
-  - Loyalty reward programs
-
-### 📊 3. Enhanced Visualizations
-
-- Interactive gauge charts for churn probability
-- Color-coded risk levels (High/Medium/Low)
-- Distribution charts and trend analysis
-- Batch prediction summaries with statistics
-
-### 🤖 4. Optimized ML Pipeline
-
-| Component | Original | Improved |
-|-----------|----------|----------|
-| Feature Engineering | None | 6 new features |
-| Hyperparameter Tuning | Default | GridSearchCV |
-| Decision Threshold | 0.5 (fixed) | 0.45 (optimized) |
-| Ensemble Methods | Single model | Voting Classifier |
-| Business Metrics | Basic | Cost analysis & ROI |
-
----
-
-## 💻 Usage Guide
-
-### Single Customer Prediction
-
-#### Step-by-Step Process
-
-1. **Open Dashboard**
-   - Navigate to http://localhost:8501
-
-2. **Select Prediction Mode**
-   - Choose "🔍 Single Prediction"
-
-3. **Enter Customer Data**
-   ```
-   Tenure: 12 months
-   Monthly Charges: $70.00
-   Total Charges: $1000.00
-   Contract: Month-to-month
-   Internet Service: DSL
-   Payment Method: Electronic check
-   ```
-
-4. **View Results**
-   - Churn probability and risk level
-   - Key risk factors identified
-   - Actionable recommendations
-
-### Batch Prediction
-
-#### Option 1: Upload CSV File
-
-Create a CSV file with the following format:
-
-```csv
-tenure,MonthlyCharges,TotalCharges,Contract,InternetService,PaymentMethod
-12,70.0,1000.0,Month-to-month,DSL,Electronic check
-24,50.0,1200.0,One year,Fiber optic,Bank transfer (automatic)
-36,45.0,1500.0,Two year,DSL,Credit card (automatic)
-```
-
-#### Option 2: Manual Entry
-
-Use the dashboard's manual entry form for multiple customers.
-
-#### Batch Results Include
-
-- ✅ Individual predictions for each customer
-- 📊 Summary statistics (high/medium/low risk counts)
-- 🎯 Top recommendations across all customers
-- 💾 Downloadable CSV with all predictions
-
----
-
-## 📡 API Documentation
-
-### Base URL
-
-```
-http://localhost:8000
-```
-
-### Endpoints
-
-#### 1. Health Check
-
-**Request:**
-```http
-GET /health
-```
-
-**Response:**
-```json
-{
-  "status": "healthy",
-  "model_loaded": true,
-  "optimal_threshold": 0.45
-}
-```
-
-#### 2. Single Prediction (Simplified)
-
-**Request:**
-```http
-POST /predict
-Content-Type: application/json
-
-{
-  "tenure": 12,
-  "MonthlyCharges": 70.0,
-  "TotalCharges": 1000.0,
-  "Contract": "Month-to-month",
-  "InternetService": "DSL",
-  "PaymentMethod": "Electronic check"
-}
-```
-
-**Response:**
-```json
-{
-  "churn_prediction": true,
-  "churn_probability": 0.75,
-  "risk_level": "High",
-  "confidence": "Very confident",
-  "key_factors": [
-    "Month-to-month contract (high churn risk)",
-    "New customer (≤12 months tenure)",
-    "Electronic check payment method"
-  ],
-  "recommendations": [
-    {
-      "priority": "High",
-      "action": "Offer Long-term Contract",
-      "description": "Offer a 1-year or 2-year contract with discount",
-      "expected_impact": "Reduce churn probability by 30-40%"
-    }
-  ]
-}
-```
-
-#### 3. Batch Prediction
-
-**Request:**
-```http
-POST /batch_predict
-Content-Type: application/json
-
-[
-  {
-    "tenure": 12,
-    "MonthlyCharges": 70.0,
-    "TotalCharges": 1000.0,
-    "Contract": "Month-to-month",
-    "InternetService": "DSL",
-    "PaymentMethod": "Electronic check"
-  },
-  {
-    "tenure": 24,
-    "MonthlyCharges": 50.0,
-    "TotalCharges": 1200.0,
-    "Contract": "One year",
-    "InternetService": "Fiber optic",
-    "PaymentMethod": "Bank transfer (automatic)"
-  }
-]
-```
-
-**Response:**
-```json
-{
-  "predictions": [...],
-  "summary": {
-    "total_customers": 2,
-    "high_risk_count": 1,
-    "medium_risk_count": 0,
-    "low_risk_count": 1,
-    "average_churn_probability": 0.45,
-    "predicted_churn_count": 1
-  }
-}
-```
-
-#### 4. Model Information
-
-**Request:**
-```http
-GET /model_info
-```
-
-**Response:**
-```json
-{
-  "model_type": "RandomForestClassifier",
-  "features_used": 36,
-  "optimal_threshold": 0.45,
-  "critical_features": [
-    "tenure",
-    "MonthlyCharges",
-    "TotalCharges",
-    "Contract",
-    "InternetService",
-    "PaymentMethod"
-  ]
-}
-```
-
-### Risk Level Classification
-
-| Risk Level | Probability Range | Action Required |
-|------------|------------------|-----------------|
-| 🔴 **High** | >70% | Immediate intervention |
-| 🟡 **Medium** | 30-70% | Monitor closely |
-| 🟢 **Low** | <30% | Standard service |
+**Why this dataset?**
+- Representative of real-world telecom churn patterns
+- Moderate class imbalance (manageable with SMOTE)
+- Diverse feature types (demographic, behavioral, contractual)
+- Sufficient size for robust model training
 
 ---
 
 ## 🔬 Machine Learning Pipeline
 
-### Dataset Overview
+### 1. Data Preprocessing
 
-| Attribute | Details |
-|-----------|---------|
-| **Source** | Telco Customer Churn Dataset |
-| **Total Records** | 7,043 customers |
-| **Features** | 21 original features |
-| **Target** | Binary classification (Churn: Yes/No) |
-| **Churn Rate** | 26.54% |
+#### 1.1 Data Cleaning
+**Technique**: Missing value imputation for `TotalCharges`
 
-### Data Preprocessing
+**Why**: New customers (tenure = 0) have missing `TotalCharges` because they haven't been billed yet. These are filled with 0, which is logically correct for new customers.
 
-#### 1. Data Cleaning
-
-- Handle missing values in `TotalCharges`
-- Convert data types appropriately
-- Remove duplicates and invalid entries
-
-#### 2. Feature Engineering ⭐
-
-**6 New Features Created:**
-
-| Feature | Description | Impact |
-|---------|-------------|--------|
-| `MonthlyCharges_to_TotalCharges` | Ratio of monthly to total charges | Spending efficiency |
-| `AvgMonthlyCharges` | Average monthly charges | Revenue per month |
-| `TenureGroup` | Customer segmentation | Loyalty indicator |
-| `ServiceCount` | Number of active services | Engagement level |
-| `ContractValue` | Contract value calculation | Customer lifetime value |
-| `HighRiskProfile` | Composite risk indicator | Risk aggregation |
-
-#### 3. Encoding & Scaling ⭐
-
+**Implementation**:
 ```python
-# Corrected preprocessing order
-1. One-hot encoding for categorical variables
-2. StandardScaler for numerical features
-3. SMOTE applied on normalized data
+df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
+df['TotalCharges'] = df['TotalCharges'].fillna(0)
 ```
 
-**Critical Fix:** Scaling BEFORE SMOTE (not after)
+#### 1.2 Feature Engineering
+**Technique**: Creation of 6 domain-specific features
 
-#### 4. Handling Class Imbalance ⭐
+**Why Feature Engineering?**
+- Captures non-linear relationships between existing features
+- Creates business-interpretable features (e.g., customer loyalty segments)
+- Improves model's ability to identify churn patterns
 
-- **Technique**: SMOTE (Synthetic Minority Over-sampling)
-- **Result**: Balanced training set with 4,139 samples per class
-- **Impact**: Improved model's ability to detect churn
+**Features Created:**
 
-### Model Training
+1. **MonthlyCharges_to_TotalCharges** (Ratio)
+   - Formula: `MonthlyCharges / (TotalCharges + 1)`
+   - **Purpose**: Identifies spending efficiency. High ratio indicates new customers or potential dissatisfaction
+   - **Business Insight**: New customers or those with low total spending relative to monthly charges are at higher risk
 
-#### Algorithms Tested
+2. **AvgMonthlyCharges** (Average)
+   - Formula: `TotalCharges / (tenure + 1)`
+   - **Purpose**: Normalizes spending across different customer tenures
+   - **Business Insight**: Allows comparison of spending patterns regardless of customer age
 
-1. **Logistic Regression** - Baseline model
-2. **Random Forest** - With GridSearchCV ⭐
-3. **XGBoost** - With GridSearchCV ⭐
+3. **TenureGroup** (Categorical Segmentation)
+   - Bins: New (0-12), Regular (12-24), Loyal (24-48), VeryLoyal (48+)
+   - **Purpose**: Captures non-linear relationship between tenure and churn
+   - **Business Insight**: New customers (≤12 months) have highest churn risk (42.7%)
 
-#### Hyperparameter Tuning ⭐
+4. **ServiceCount** (Count Feature)
+   - Formula: Sum of active services (Phone, Security, Backup, etc.)
+   - **Purpose**: Measures customer engagement level
+   - **Business Insight**: More services = higher engagement = lower churn risk
 
-```python
-GridSearchCV Configuration:
-- Cross-validation: 5-fold
-- Optimization metric: ROC-AUC
-- Parameter grid: Extensive search space
+5. **ContractValue** (Interaction Feature)
+   - Formula: `MonthlyCharges × Contract Duration`
+   - **Purpose**: Quantifies total contract value
+   - **Business Insight**: Higher contract value indicates stronger commitment
+
+6. **HighRiskProfile** (Composite Indicator)
+   - Combines multiple risk factors into binary indicator
+   - **Purpose**: Quick identification of high-risk customers
+   - **Business Insight**: Enables rapid filtering for retention campaigns
+
+**Result**: 21 original features → 27 features after engineering
+
+#### 1.3 Encoding & Scaling
+
+**One-Hot Encoding**
+- **Technique**: `pd.get_dummies()` with `drop_first=True`
+- **Why**: 
+  - Converts categorical variables to numerical format required by ML algorithms
+  - `drop_first=True` prevents multicollinearity (dummy variable trap)
+  - Preserves all information while making features interpretable
+- **Result**: 36 features after encoding (from 27)
+
+**StandardScaler**
+- **Technique**: Z-score normalization: `(x - μ) / σ`
+- **Why**:
+  - Features have different scales (tenure: 0-72, MonthlyCharges: 18-118)
+  - Tree-based models (Random Forest, XGBoost) don't strictly require scaling, but:
+    - SMOTE uses distance metrics (KNN) which are scale-sensitive
+    - Ensures consistent feature importance interpretation
+    - Improves convergence for ensemble methods
+- **Critical Order**: Scaling **BEFORE** SMOTE (not after)
+  - **Reason**: SMOTE generates synthetic samples using KNN, which requires normalized features for accurate distance calculations
+
+#### 1.4 Class Imbalance Handling
+
+**Technique**: SMOTE (Synthetic Minority Oversampling Technique)
+
+**Why SMOTE?**
+- **Problem**: 73.46% No Churn vs 26.54% Churn creates bias toward majority class
+- **Why not undersampling?**: Would lose valuable data (reduce from 5,174 to 1,869)
+- **Why not class weights?**: SMOTE creates new samples, improving model's understanding of minority class patterns
+- **How it works**: 
+  - Uses KNN to find similar minority class samples
+  - Generates synthetic samples along line segments connecting neighbors
+  - Creates balanced dataset without losing information
+
+
+**Why this order matters**:
+1. Split train/test (80/20) - prevents data leakage
+2. Scale features - normalizes for distance calculations
+3. Apply SMOTE - generates synthetic samples on normalized data
+4. Train model - learns from balanced, normalized dataset
+
+---
+
+### 2. Model Selection & Training
+
+#### 2.1 Algorithm Selection
+
+**Three algorithms tested:**
+
+1. **Logistic Regression** (Baseline)
+   - **Why included**: 
+     - Simple, interpretable baseline
+     - Fast training and prediction
+     - Provides probability estimates
+   - **Limitations**: Assumes linear relationships, may miss complex patterns
+   - **Configuration**: `class_weight='balanced'` to handle residual imbalance
+
+2. **Random Forest** (Primary Model)
+   - **Why chosen**:
+     - Handles non-linear relationships and feature interactions
+     - Robust to outliers and missing values
+     - Provides feature importance scores
+     - Less prone to overfitting than single decision trees
+     - Good performance on tabular data
+   - **How it works**: 
+     - Builds multiple decision trees on bootstrapped samples
+     - Uses random feature subsets at each split (reduces correlation)
+     - Averages predictions across all trees
+   - **Best Hyperparameters** (from GridSearchCV):
+     - `n_estimators=200`: More trees = better generalization (diminishing returns after ~200)
+     - `max_depth=20`: Prevents overfitting while capturing patterns
+     - `min_samples_split=2`: Allows fine-grained splits
+     - `min_samples_leaf=1`: Maximum flexibility
+     - `class_weight='balanced'`: Additional handling of class imbalance
+
+3. **XGBoost** (Gradient Boosting)
+   - **Why tested**:
+     - State-of-the-art performance on structured data
+     - Handles missing values natively
+     - Built-in regularization prevents overfitting
+     - Often outperforms Random Forest
+   - **How it works**:
+     - Sequentially builds trees that correct previous errors
+     - Uses gradient descent to minimize loss function
+     - Applies regularization (L1/L2) to prevent overfitting
+   - **Best Hyperparameters**:
+     - `n_estimators=200`: Number of boosting rounds
+     - `max_depth=7`: Shallower trees prevent overfitting
+     - `learning_rate=0.1`: Balance between speed and performance
+     - `subsample=1.0`: Use all samples (no subsampling needed with regularization)
+     - `scale_pos_weight=2`: Adjusts for class imbalance
+
+
+
+#### 2.2 Hyperparameter Tuning
+
+**Technique**: GridSearchCV with 5-fold cross-validation
+
+**Why GridSearchCV?**
+- **Systematic search**: Tests all combinations in parameter grid
+- **Cross-validation**: Reduces overfitting to specific train/test split
+- **5-fold CV**: Good balance between computational cost and validation reliability
+- **Scoring metric**: ROC-AUC (area under ROC curve)
+  - **Why ROC-AUC?**: 
+    - Works well with imbalanced classes
+    - Measures ability to distinguish between classes at all thresholds
+    - More informative than accuracy for classification
+
+
+
+**Results:**
+- Random Forest CV AUC: **0.9266**
+- XGBoost CV AUC: **0.9292**
+
+#### 2.3 Model Selection
+
+**Final Model**: Random Forest
+
+**Why Random Forest over XGBoost?**
+- **Performance**: Similar AUC (0.8250 vs 0.8104 on test set)
+- **Interpretability**: Easier to explain feature importance
+- **Stability**: Less sensitive to hyperparameter changes
+- **Training time**: Faster for this dataset size
+- **Production**: Simpler deployment and maintenance
+
+**Test Set Performance:**
+- **AUC-ROC**: 0.8250
+- **Accuracy**: 0.7672
+- **Precision**: 0.5548
+- **Recall**: 0.6230
+- **F1-Score**: 0.5869
+
+---
+
+### 3. Threshold Optimization
+
+**Technique**: F1-Score optimization across threshold range
+
+**Why optimize threshold?**
+- Default threshold (0.5) assumes equal cost of false positives and false negatives
+- In churn prediction: **False negatives are more costly** (losing a customer)
+- Lower threshold = higher recall (catch more churners) but lower precision
+
+**Process:**
+1. Test thresholds from 0.1 to 0.9 (step 0.05)
+2. Calculate F1-Score for each threshold
+3. Select threshold with maximum F1-Score
+
+**Result**: Optimal threshold = **0.45** (instead of 0.5)
+
+**Impact:**
+- F1-Score improvement: 0.6019 → 0.6125 (+1.76%)
+- Better balance between precision and recall
+- More churners identified (higher recall) with acceptable precision
+
+**Interpretation**: 
+- Probability ≥ 0.45 → Predict "Churn"
+- This threshold prioritizes identifying at-risk customers (higher recall)
+- Acceptable trade-off: Some false alarms (false positives) to catch more real churners
+
+---
+
+## 📈 Results & Interpretation
+
+### Model Performance Metrics
+
+| Metric | Value | Interpretation |
+|--------|-------|----------------|
+| **AUC-ROC** | 0.8250 | **Good discrimination**: Model can distinguish churners from non-churners 82.5% of the time. AUC > 0.8 is considered good for binary classification. |
+| **Accuracy** | 0.7672 | **76.72% correct predictions**: Overall prediction accuracy. Note: Accuracy can be misleading with imbalanced classes. |
+| **Precision** | 0.5548 | **55.48% precision**: Of customers predicted to churn, 55.48% actually churn. Lower precision means more false alarms, but acceptable for proactive retention. |
+| **Recall** | 0.6230 | **62.30% recall**: Model identifies 62.30% of actual churners. This is the critical metric - we want to catch as many churners as possible. |
+| **F1-Score** | 0.5869 | **Harmonic mean**: Balance between precision and recall. F1 > 0.5 indicates reasonable performance. |
+
+### Feature Importance Analysis
+
+**Top 5 Most Important Features:**
+
+1. **TotalCharges (16.63%)**
+   - **Interpretation**: Total amount paid is strongest predictor
+   - **Insight**: Low total charges = new or dissatisfied customers
+   - **Action**: Monitor customers with low total spending
+
+2. **tenure (15.24%)**
+   - **Interpretation**: Customer loyalty duration is critical
+   - **Insight**: New customers (≤12 months) at highest risk
+   - **Action**: Implement early retention programs
+
+3. **MonthlyCharges (13.42%)**
+   - **Interpretation**: Monthly billing amount matters
+   - **Insight**: Very high or very low charges indicate risk
+   - **Action**: Review pricing for high-charge customers
+
+4. **PaymentMethod_Electronic check (10.33%)**
+   - **Interpretation**: Payment method indicates risk
+   - **Insight**: Electronic check users have higher churn (manual payment = less commitment)
+   - **Action**: Encourage automatic payment setup
+
+5. **InternetService_Fiber optic (5.63%)**
+   - **Interpretation**: Service type affects churn
+   - **Insight**: Fiber optic customers churn at 41.9% (vs 19% for DSL)
+   - **Action**: Investigate fiber service quality/price concerns
+
+### Business Insights
+
+**Contract Type Impact:**
+- **Month-to-month**: 42.7% churn rate ⚠️
+  - **Why**: No commitment, easy to switch
+  - **Action**: Aggressively promote long-term contracts
+- **One-year**: ~15% churn rate
+  - **Why**: Moderate commitment
+  - **Action**: Offer incentives to extend to 2-year
+- **Two-year**: 2.8% churn rate ✅
+  - **Why**: Strong commitment, lower churn
+  - **Action**: Maintain competitive 2-year contract offers
+
+**Internet Service Impact:**
+- **Fiber optic**: 41.9% churn rate ⚠️
+  - **Why**: Possibly price/quality mismatch, high expectations
+  - **Action**: Review fiber pricing and service quality
+- **DSL**: 19.0% churn rate
+  - **Why**: Established service, stable
+- **No internet**: 7.4% churn rate ✅
+  - **Why**: Phone-only customers are more stable
+
+**Customer Tenure Segments:**
+- **New (0-12 months)**: Highest risk
+  - **Why**: Still evaluating service, no loyalty established
+  - **Action**: Welcome programs, early check-ins
+- **Regular (12-24 months)**: Moderate risk
+  - **Why**: Some loyalty, but still exploring options
+- **Loyal (24-48 months)**: Lower risk
+  - **Why**: Established relationship
+- **Very Loyal (48+ months)**: Lowest risk
+  - **Why**: Strong relationship, unlikely to switch
+
+---
+
+## 🛠 Technical Architecture
+
+### Deployment Stack
+
+**Backend (FastAPI)**
+- **Why FastAPI?**
+  - Automatic API documentation (Swagger/OpenAPI)
+  - Fast performance (async support)
+  - Type validation with Pydantic
+  - Easy integration with ML models
+- **Endpoints**: `/predict`, `/batch_predict`, `/health`, `/model_info`
+- **Model Loading**: Joblib serialization for fast model persistence
+
+**Frontend (Streamlit)**
+- **Why Streamlit?**
+  - Rapid development for data apps
+  - Built-in widgets and visualizations
+  - No frontend framework knowledge required
+  - Easy deployment
+- **Features**: Single prediction, batch processing, analytics dashboard
+
+**Model Serialization (Joblib)**
+- **Why Joblib?**
+  - Optimized for NumPy arrays (faster than pickle)
+  - Handles large models efficiently
+  - Standard in scikit-learn ecosystem
+- **Files Saved**:
+  - `churn_prediction_model_improved.pkl`: Trained model
+  - `scaler_improved.pkl`: StandardScaler for preprocessing
+  - `feature_columns_improved.pkl`: Feature order for consistency
+  - `optimal_threshold.pkl`: Optimized decision threshold
+
+### Architecture Flow
+
+```
+User Input (6 features)
+    ↓
+Streamlit Frontend (Validation & UI)
+    ↓
+FastAPI Backend (Preprocessing)
+    ↓
+Model Inference (Random Forest)
+    ↓
+Post-processing (Threshold, Recommendations)
+    ↓
+Response (Prediction + Recommendations)
 ```
 
-**Best Parameters Selected:**
-- `n_estimators`: 200
-- `max_depth`: 15
-- `min_samples_split`: 5
-- `min_samples_leaf`: 2
-
-#### Ensemble Method ⭐
-
-**Voting Classifier:**
-- Combines Logistic Regression, Random Forest, and XGBoost
-- Soft voting using probability predictions
-- Improved robustness and generalization
-
-### Model Selection
-
-**Selected Model:** Random Forest (or Ensemble if superior)
-
-**Decision Criteria:**
-- ✅ Highest cross-validation AUC (~0.93)
-- ✅ Best test set performance (AUC ~0.82-0.85)
-- ✅ Stable predictions across folds
-- ✅ Interpretable feature importances
-
 ---
 
-## 📈 Model Performance
+## 📡 API Usage
 
-### Performance Comparison
+### Single Prediction
 
-| Metric | Original Model | Improved Model | Improvement |
-|--------|---------------|----------------|-------------|
-| **AUC-ROC** | 82.05% | 85-87% | +3-5% ⬆️ |
-| **Recall** | 59.89% | 70-75% | +10-15% ⬆️ |
-| **F1-Score** | 58.26% | 65-70% | +7-12% ⬆️ |
-| **Precision** | 56.77% | 62-67% | +5-10% ⬆️ |
-| **Threshold** | 0.5 (fixed) | 0.45 (optimal) | Data-driven ⭐ |
-
-### Key Improvements Impact
-
-| Improvement | Impact on Performance |
-|-------------|----------------------|
-| **Preprocessing Fix** | Scaling before SMOTE improves synthetic sample quality |
-| **Feature Engineering** | 6 new features capture additional patterns (+3-4% AUC) |
-| **Hyperparameter Tuning** | Optimized parameters for better performance (+2-3% AUC) |
-| **Optimal Threshold** | Better balance between precision and recall (+5-10% recall) |
-| **Ensemble Methods** | Combines strengths of multiple models (+1-2% AUC) |
-
-### Confusion Matrix (Expected)
-
-```
-                Predicted
-              No      Yes
-Actual  No    1100    150
-        Yes   110     350
-```
-
-**Interpretation:**
-- True Negatives: 1100 (correctly identified non-churners)
-- False Positives: 150 (false alarms)
-- False Negatives: 110 (missed churners)
-- True Positives: 350 (correctly identified churners)
-
----
-
-## 💡 Business Insights
-
-### Top Churn Drivers
-
-| Rank | Feature | Importance | Description |
-|------|---------|------------|-------------|
-| 1 | `TotalCharges` | 16.63% | Total amount charged to customer |
-| 2 | `tenure` | 15.24% | Customer loyalty duration |
-| 3 | `MonthlyCharges` | 13.42% | Monthly billing amount |
-| 4 | `PaymentMethod_Electronic check` | 10.33% | Electronic check payment |
-| 5 | `InternetService_Fiber optic` | 5.63% | Fiber optic service |
-
-### Critical Patterns Discovered
-
-#### 1. Contract Type Impact
-
-| Contract Type | Churn Rate | Risk Level |
-|---------------|------------|------------|
-| Month-to-month | **42.7%** | 🔴 Very High |
-| One-year | ~15% | 🟡 Medium |
-| Two-year | **2.8%** | 🟢 Very Low |
-
-**Insight:** Month-to-month contracts have **15x higher churn** than two-year contracts.
-
-#### 2. Internet Service Impact
-
-| Service Type | Churn Rate | Risk Level |
-|--------------|------------|------------|
-| Fiber optic | **41.9%** | 🔴 High |
-| DSL | 19.0% | 🟡 Medium |
-| No internet | **7.4%** | 🟢 Low |
-
-**Insight:** Fiber optic customers churn at **5.6x the rate** of non-internet customers.
-
-#### 3. Customer Tenure Trends
-
-| Tenure Period | Churn Risk | Priority |
-|---------------|------------|----------|
-| 0-12 months | Very High | 🔴 Critical |
-| 13-24 months | High | 🟡 Monitor |
-| 25-48 months | Medium | 🟢 Standard |
-| 48+ months | Low | ✅ Retain |
-
-**Insight:** First year is the **critical retention period**.
-
-### Actionable Business Recommendations
-
-#### Immediate Actions (High Priority)
-
-1. **Target Month-to-Month Customers**
-   - Offer contract conversion incentives
-   - 12-month contract: 10% discount
-   - 24-month contract: 20% discount
-   - **Expected Impact:** Reduce churn by 30-40%
-
-2. **Improve Fiber Optic Service**
-   - Investigate service quality issues
-   - Review pricing competitiveness
-   - Enhance customer support
-   - **Expected Impact:** Reduce fiber churn by 25%
-
-3. **New Customer Retention Program**
-   - Welcome package for first 3 months
-   - Quarterly check-ins in first year
-   - Dedicated onboarding specialist
-   - **Expected Impact:** Reduce first-year churn by 35%
-
-#### Medium-Term Strategies
-
-4. **Proactive Payment Method Transition**
-   - Incentivize automatic payment methods
-   - $5/month discount for auto-pay
-   - **Expected Impact:** Reduce churn by 10-15%
-
-5. **Loyalty and Rewards Program**
-   - Points for tenure milestones
-   - Exclusive benefits for 2+ year customers
-   - **Expected Impact:** Increase retention by 20%
-
-#### Long-Term Initiatives
-
-6. **Predictive Intervention System**
-   - Real-time churn risk monitoring
-   - Automated retention campaigns
-   - **Expected Impact:** Reduce overall churn by 25-30%
-
----
-
-## 🛠 Technical Details
-
-### Technology Stack
-
-#### Machine Learning
-
-| Library | Version | Purpose |
-|---------|---------|---------|
-| scikit-learn | 1.0+ | Model training & evaluation |
-| XGBoost | 1.5+ | Gradient boosting |
-| imbalanced-learn | 0.9+ | SMOTE implementation |
-| joblib | 1.1+ | Model serialization |
-
-#### Data Processing
-
-| Library | Version | Purpose |
-|---------|---------|---------|
-| pandas | 1.3+ | Data manipulation |
-| numpy | 1.21+ | Numerical computations |
-
-#### Visualization
-
-| Library | Version | Purpose |
-|---------|---------|---------|
-| matplotlib | 3.4+ | Static charts |
-| seaborn | 0.11+ | Statistical visualizations |
-| plotly | 5.0+ | Interactive visualizations |
-
-#### Web Framework
-
-| Library | Version | Purpose |
-|---------|---------|---------|
-| FastAPI | 0.68+ | REST API server |
-| Streamlit | 1.0+ | Dashboard UI |
-| uvicorn | 0.15+ | ASGI server |
-| pydantic | 1.8+ | Data validation |
-
-### System Architecture
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        USER INTERFACE                        │
-│                     (Streamlit Dashboard)                    │
-│                                                               │
-│  ┌─────────────────┐              ┌─────────────────┐       │
-│  │ Single Prediction│              │ Batch Prediction│       │
-│  │   (6 features)   │              │  (CSV upload)   │       │
-│  └────────┬─────────┘              └────────┬────────┘       │
-└───────────┼──────────────────────────────────┼───────────────┘
-            │                                  │
-            │          HTTP Requests           │
-            │                                  │
-┌───────────▼──────────────────────────────────▼───────────────┐
-│                      FASTAPI SERVER                           │
-│                     (backend_improved.py)                     │
-│                                                               │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  Request Validation & Default Value Assignment       │   │
-│  └──────────────────┬───────────────────────────────────┘   │
-│                     │                                         │
-│  ┌──────────────────▼───────────────────────────────────┐   │
-│  │         Feature Engineering & Preprocessing          │   │
-│  └──────────────────┬───────────────────────────────────┘   │
-└───────────────────────┼──────────────────────────────────────┘
-                        │
-┌───────────────────────▼──────────────────────────────────────┐
-│                    MACHINE LEARNING MODEL                     │
-│              (Random Forest / Ensemble Classifier)            │
-│                                                               │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  • churn_prediction_model_improved.pkl               │   │
-│  │  • scaler_improved.pkl                               │   │
-│  │  • feature_columns_improved.pkl                      │   │
-│  │  • optimal_threshold.pkl (0.45)                      │   │
-│  └──────────────────┬───────────────────────────────────┘   │
-└───────────────────────┼──────────────────────────────────────┘
-                        │
-┌───────────────────────▼──────────────────────────────────────┐
-│                 PREDICTION & RECOMMENDATIONS                  │
-│                                                               │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │  • Churn Probability (0.0 - 1.0)                     │   │
-│  │  • Risk Level (High/Medium/Low)                      │   │
-│  │  • Key Risk Factors                                  │   │
-│  │  • Prioritized Recommendations                       │   │
-│  │  • Expected Impact Assessment                        │   │
-│  └──────────────────┬───────────────────────────────────┘   │
-└───────────────────────┼──────────────────────────────────────┘
-                        │
-            ┌───────────▼───────────┐
-            │   JSON Response       │
-            │   (to Dashboard)      │
-            └───────────────────────┘
-```
-
-### Model Artifacts
-
-#### File Structure
-
-```
-models/
-├── Original Model (v1.0)
-│   ├── churn_prediction_model.pkl          (5.2 MB)
-│   ├── scaler.pkl                          (12 KB)
-│   └── feature_columns.pkl                 (2 KB)
-│
-└── Improved Model (v2.0) ⭐
-    ├── churn_prediction_model_improved.pkl (6.1 MB)
-    ├── scaler_improved.pkl                 (15 KB)
-    ├── feature_columns_improved.pkl        (3 KB)
-    └── optimal_threshold.pkl               (1 KB)
-```
-
-#### Loading Strategy
-
-```python
-# Automatic fallback mechanism
-try:
-    model = load('churn_prediction_model_improved.pkl')
-    scaler = load('scaler_improved.pkl')
-    features = load('feature_columns_improved.pkl')
-    threshold = load('optimal_threshold.pkl')
-except:
-    # Fallback to original model
-    model = load('churn_prediction_model.pkl')
-    scaler = load('scaler.pkl')
-    features = load('feature_columns.pkl')
-    threshold = 0.5
-```
-
----
-
-## 📚 Documentation
-
-### Available Resources
-
-| Document | Description | Language |
-|----------|-------------|----------|
-| `README.md` | Complete project overview (this file) | English |
-| `GUIDE_UTILISATION_IMPROVED.md` | Detailed usage guide | French |
-| `ANALYSE_AMELIORATIONS.md` | Technical improvements analysis | French |
-| `ameliorations_code.py` | Reusable improvement functions | Python |
-
-### Interactive API Documentation
-
-The FastAPI server provides automatic interactive documentation:
-
-- **Swagger UI**: http://localhost:8000/docs
-  - Interactive API testing
-  - Request/response examples
-  - Schema definitions
-
-- **ReDoc**: http://localhost:8000/redoc
-  - Clean documentation view
-  - Searchable endpoints
-  - Detailed descriptions
-
----
-
-## 🎓 Learning Resources
-
-### Jupyter Notebooks
-
-#### For Beginners
-
-**`ml1.ipynb`** - Original Pipeline
-- Basic data exploration
-- Standard preprocessing
-- Simple model training
-- Essential evaluation metrics
-
-#### For Advanced Users
-
-**`ml1_improved.ipynb`** ⭐ - Optimized Pipeline
-- Advanced feature engineering
-- Hyperparameter tuning techniques
-- Ensemble methods
-- Business metrics calculation
-- Threshold optimization
-- Model deployment preparation
-
-### Key Concepts Demonstrated
-
-1. **Data Science Workflow**
-   - Data loading and exploration
-   - Handling missing values
-   - Feature engineering strategies
-
-2. **Machine Learning Fundamentals**
-   - Classification algorithms
-   - Model training and validation
-   - Performance metrics
-   - Cross-validation techniques
-
-3. **Advanced Techniques**
-   - Handling imbalanced datasets (SMOTE)
-   - Hyperparameter tuning (GridSearchCV)
-   - Ensemble methods (Voting Classifier)
-   - Threshold optimization
-   - Feature importance analysis
-
-4. **Production Deployment**
-   - Model serialization
-   - RESTful API development
-   - Interactive dashboard creation
-   - Error handling and validation
-
----
-
-## 🔄 Version History
-
-### Version 2.0.0 (Improved) ⭐ - Current
-
-**Major Enhancements:**
-
-| Feature | Status | Impact |
-|---------|--------|--------|
-| Simplified input (6 fields only) | ✅ | High usability |
-| Automatic recommendations | ✅ | Actionable insights |
-| Key risk factors identification | ✅ | Transparency |
-| Optimized preprocessing | ✅ | Better accuracy |
-| Hyperparameter tuning | ✅ | +3-5% performance |
-| Feature engineering (6 new) | ✅ | Richer data |
-| Optimal threshold (0.45) | ✅ | Better balance |
-| Ensemble methods | ✅ | Improved robustness |
-| Business metrics (cost/ROI) | ✅ | Business value |
-| Enhanced visualizations | ✅ | Better UX |
-
-### Version 1.0.0 (Original)
-
-**Initial Release:**
-- Basic ML pipeline
-- 18 required input fields
-- Standard preprocessing
-- Single model (Random Forest)
-- Fixed threshold (0.5)
-- Basic API and dashboard
-
-### Comparison Table
-
-| Feature | v1.0 | v2.0 |
-|---------|------|------|
-| **Required Inputs** | 18 fields | 6 fields ⭐ |
-| **Recommendations** | ❌ None | ✅ Automatic ⭐ |
-| **Risk Factors** | ❌ None | ✅ Identified ⭐ |
-| **Feature Engineering** | ❌ None | ✅ 6 features ⭐ |
-| **Hyperparameter Tuning** | ❌ Default | ✅ GridSearchCV ⭐ |
-| **Threshold** | 0.5 fixed | 0.45 optimized ⭐ |
-| **Ensemble** | ❌ Single model | ✅ Voting ⭐ |
-| **Business Metrics** | ❌ Basic | ✅ Advanced ⭐ |
-| **API Response** | Simple | Rich ⭐ |
-| **Visualizations** | Basic | Enhanced ⭐ |
-
----
-
-## 🚧 Roadmap
-
-### ✅ Completed (Version 2.0)
-
-- [x] Hyperparameter tuning with GridSearchCV
-- [x] Advanced feature engineering (6 new features)
-- [x] Ensemble methods (Voting Classifier)
-- [x] Optimal threshold optimization
-- [x] Automated retention recommendations
-- [x] Cost-benefit analysis
-- [x] Simplified input interface (6 fields)
-- [x] Enhanced interactive visualizations
-- [x] Rich API responses with insights
-
-### 🔄 In Progress (Version 2.1)
-
-- [ ] Docker containerization
-- [ ] Automated testing suite
-- [ ] Performance monitoring dashboard
-- [ ] A/B testing framework
-
-### 📋 Planned (Version 3.0)
-
-#### Infrastructure
-- [ ] Database integration (PostgreSQL)
-- [ ] Redis caching layer
-- [ ] Kubernetes deployment
-- [ ] CI/CD pipeline
-
-#### Features
-- [ ] Real-time data integration
-- [ ] Automated model retraining
-- [ ] Model drift detection
-- [ ] Multi-model comparison dashboard
-
-#### Advanced ML
-- [ ] Deep learning models (LSTM, Transformer)
-- [ ] AutoML integration
-- [ ] Explainable AI (SHAP, LIME)
-- [ ] Customer segmentation clustering
-
-#### Business Features
-- [ ] ROI calculator
-- [ ] Campaign effectiveness tracking
-- [ ] Customer lifetime value prediction
-- [ ] Retention strategy optimizer
-
-#### User Experience
-- [ ] User authentication & authorization
-- [ ] Role-based access control
-- [ ] Advanced filtering and search
-- [ ] Export to Excel/PDF reports
-- [ ] Email notifications
-- [ ] Scheduled predictions
-
----
-
-## 🤝 Contributing
-
-We welcome contributions to improve this project!
-
-### How to Contribute
-
-1. **Fork the Repository**
-   ```bash
-   git clone https://github.com/yourusername/copie-ml.git
-   ```
-
-2. **Create a Feature Branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-3. **Make Your Changes**
-   - Follow the existing code style
-   - Add comments for complex logic
-   - Update documentation as needed
-
-4. **Test Your Changes**
-   ```bash
-   # Run tests (if available)
-   pytest tests/
-   
-   # Test the API
-   uvicorn backend_improved:app --reload
-   
-   # Test the dashboard
-   streamlit run frontend_improved.py
-   ```
-
-5. **Commit Your Changes**
-   ```bash
-   git add .
-   git commit -m "Add: Brief description of your changes"
-   ```
-
-6. **Push to Your Fork**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-7. **Submit a Pull Request**
-   - Describe your changes clearly
-   - Reference any related issues
-   - Wait for review and feedback
-
-### Contribution Guidelines
-
-- ✅ Write clear, concise commit messages
-- ✅ Follow PEP 8 style guide for Python
-- ✅ Add docstrings to functions and classes
-- ✅ Update documentation for new features
-- ✅ Test thoroughly before submitting
-- ❌ Don't include large binary files
-- ❌ Don't commit sensitive information
-
-### Areas We Need Help With
-
-| Area | Skill Level | Priority |
-|------|-------------|----------|
-| Unit testing | Intermediate | High |
-| Documentation improvements | Beginner | High |
-| UI/UX enhancements | Intermediate | Medium |
-| Additional visualizations | Intermediate | Medium |
-| Performance optimization | Advanced | Medium |
-| Deep learning models | Advanced | Low |
-
----
-
-## 🐛 Bug Reports & Feature Requests
-
-### Reporting Bugs
-
-Found a bug? Please create an issue with:
-
-- **Description**: What happened?
-- **Expected Behavior**: What should happen?
-- **Steps to Reproduce**: How can we reproduce it?
-- **Environment**: Python version, OS, etc.
-- **Screenshots**: If applicable
-
-### Requesting Features
-
-Have an idea? We'd love to hear it! Include:
-
-- **Feature Description**: What do you want?
-- **Use Case**: Why is this useful?
-- **Proposed Solution**: How might it work?
-- **Alternatives Considered**: Other approaches?
-
----
-
-
-## 📊 Performance Benchmarks
-
-### API Response Times
-
-| Endpoint | Average Time | 95th Percentile |
-|----------|-------------|-----------------|
-| `/predict` (single) | 45ms | 85ms |
-| `/batch_predict` (10 customers) | 120ms | 200ms |
-| `/batch_predict` (100 customers) | 850ms | 1.2s |
-| `/model_info` | 5ms | 10ms |
-
-*Tested on: Intel i7, 16GB RAM*
-
-### Model Inference Time
-
-- **Single prediction**: ~30ms
-- **Batch (10)**: ~80ms
-- **Batch (100)**: ~600ms
-- **Batch (1000)**: ~5.5s
-
-### Memory Usage
-
-| Component | Memory |
-|-----------|--------|
-| Model loaded | ~45MB |
-| API server | ~120MB |
-| Dashboard | ~180MB |
-| **Total** | ~345MB |
-
----
-
-## 🔒 Security Considerations
-
-### Current Limitations
-
-⚠️ **Not Implemented Yet:**
-- No authentication/authorization
-- No input sanitization beyond validation
-- No rate limiting
-- No HTTPS enforcement
-- No API keys
-
-### Recommendations for Production
-
-1. **Add Authentication**
-   ```python
-   # Example with JWT
-   from fastapi.security import HTTPBearer
-   security = HTTPBearer()
-   ```
-
-2. **Enable HTTPS**
-   ```bash
-   uvicorn backend_improved:app --ssl-keyfile key.pem --ssl-certfile cert.pem
-   ```
-
-3. **Implement Rate Limiting**
-   ```python
-   from slowapi import Limiter
-   limiter = Limiter(key_func=get_remote_address)
-   ```
-
-4. **Add Input Validation**
-   - Already implemented with Pydantic
-   - Consider additional business logic validation
-
-5. **Monitor and Log**
-   ```python
-   import logging
-   logging.basicConfig(level=logging.INFO)
-   ```
-
----
-
-## 🧪 Testing
-
-### Manual Testing
-
-**Test the API:**
 ```bash
-# Health check
-curl http://localhost:8000/health
-
-# Single prediction
-curl -X POST http://localhost:8000/predict \
+curl -X POST "http://localhost:8000/predict" \
   -H "Content-Type: application/json" \
   -d '{
     "tenure": 12,
@@ -1106,231 +451,111 @@ curl -X POST http://localhost:8000/predict \
   }'
 ```
 
-**Test the Dashboard:**
-1. Navigate to http://localhost:8501
-2. Try single prediction with test data
-3. Upload a sample CSV for batch prediction
-4. Verify visualizations render correctly
-
-### Automated Testing (Planned)
-
-```python
-# Example test structure (to be implemented)
-def test_predict_endpoint():
-    response = client.post("/predict", json=test_data)
-    assert response.status_code == 200
-    assert "churn_probability" in response.json()
-
-def test_model_accuracy():
-    predictions = model.predict(X_test)
-    accuracy = accuracy_score(y_test, predictions)
-    assert accuracy > 0.80
+**Response:**
+```json
+{
+  "churn_prediction": true,
+  "churn_probability": 0.75,
+  "risk_level": "High",
+  "key_factors": [
+    "Month-to-month contract (high churn risk)",
+    "New customer (≤12 months tenure)"
+  ],
+  "recommendations": [
+    {
+      "priority": "High",
+      "action": "Offer Long-term Contract",
+      "description": "Offer a 1-year or 2-year contract with discount.",
+      "expected_impact": "Reduce churn probability by 30-40%"
+    }
+  ]
+}
 ```
 
 ---
 
-## 📦 Deployment
+## 🎯 Key Design Decisions
 
-### Local Deployment
+### Why Only 6 Features?
 
-Already covered in [Quick Start](#-quick-start) section.
+**Feature Selection Method**: Domain expertise + feature importance analysis
 
-### Docker Deployment (Planned v2.1)
+**Selected Features:**
+1. **tenure** - Strongest predictor (15.24% importance)
+2. **MonthlyCharges** - High importance (13.42%)
+3. **TotalCharges** - Highest importance (16.63%)
+4. **Contract** - Business-critical (42.7% churn for month-to-month)
+5. **InternetService** - Significant impact (41.9% churn for fiber)
+6. **PaymentMethod** - Behavioral indicator (10.33% importance)
 
-```dockerfile
-# Example Dockerfile (to be implemented)
-FROM python:3.9-slim
+**Benefits:**
+- **Reduced input complexity**: Easier for users to provide data
+- **Faster predictions**: Less preprocessing
+- **Better UX**: Shorter forms, higher completion rates
+- **Maintained accuracy**: 6 features capture 80%+ of predictive power
 
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+**Other features**: Set to sensible defaults (e.g., gender="Male", Partner="No")
 
-COPY . .
+### Why These Specific Algorithms?
 
-EXPOSE 8000 8501
+**Random Forest**:
+- **Non-linear patterns**: Churn has complex, non-linear relationships
+- **Feature interactions**: Contract type × tenure × charges creates interactions
+- **Interpretability**: Business stakeholders need to understand predictions
+- **Robustness**: Handles outliers and missing values well
 
-CMD ["sh", "-c", "uvicorn backend_improved:app --host 0.0.0.0 & streamlit run frontend_improved.py --server.port 8501"]
-```
+**XGBoost** (tested but not selected):
+- **Performance**: Slightly better CV score (0.9292 vs 0.9266)
+- **Not selected**: Similar test performance, more complex to tune
 
-### Cloud Deployment Options
-
-#### AWS
-- **EC2**: Traditional VM deployment
-- **ECS**: Container orchestration
-- **Lambda**: Serverless (with API Gateway)
-- **SageMaker**: Full ML platform
-
-#### Azure
-- **App Service**: PaaS deployment
-- **AKS**: Kubernetes service
-- **Functions**: Serverless
-- **Machine Learning**: ML workspace
-
-#### Google Cloud
-- **Compute Engine**: VM deployment
-- **GKE**: Kubernetes engine
-- **Cloud Run**: Serverless containers
-- **AI Platform**: ML deployment
-
-#### Heroku (Easiest)
-```bash
-# Quick deploy
-heroku create your-app-name
-git push heroku main
-```
+**Logistic Regression** (baseline):
+- **Baseline comparison**: Shows improvement from simple to complex models
+- **Interpretability**: Coefficients are directly interpretable
 
 ---
 
-## 🌟 Best Practices
+## 📊 Model Limitations & Considerations
 
-### For Users
+### Limitations
 
-1. **Start Simple**
-   - Use single prediction first
-   - Understand the 6 required fields
-   - Review the recommendations
+1. **Historical Data**: Model trained on past data, may not capture future trends
+2. **Domain Specificity**: Optimized for telecom, may not generalize to other industries
+3. **Temporal Changes**: Customer behavior patterns may evolve over time
+4. **Data Quality**: Assumes input data quality matches training data
 
-2. **Validate Results**
-   - Compare predictions with actual outcomes
-   - Adjust strategies based on feedback
-   - Track recommendation effectiveness
+### Best Practices
 
-3. **Iterate and Improve**
-   - Collect new data regularly
-   - Retrain model quarterly
-   - Update features based on business changes
-
-### For Developers
-
-1. **Code Quality**
-   - Follow PEP 8 style guide
-   - Write self-documenting code
-   - Add type hints
-   - Use meaningful variable names
-
-2. **Documentation**
-   - Update README for any changes
-   - Add docstrings to functions
-   - Document API changes
-   - Keep changelog updated
-
-3. **Version Control**
-   - Use semantic versioning
-   - Write clear commit messages
-   - Create feature branches
-   - Tag releases
-
-4. **Testing**
-   - Test before committing
-   - Verify backwards compatibility
-   - Check edge cases
-   - Monitor performance
+1. **Regular Retraining**: Update model with new data quarterly/semi-annually
+2. **Performance Monitoring**: Track prediction accuracy over time
+3. **Threshold Adjustment**: Re-optimize threshold as business priorities change
+4. **A/B Testing**: Validate recommendations before full deployment
+5. **Human Oversight**: Use predictions as input, not sole decision-maker
 
 ---
 
+## 🚧 Future Enhancements
 
-## 📜 License
+- **Real-time Integration**: Connect to live customer databases
+- **Automated Retraining**: Pipeline for periodic model updates
+- **Model Monitoring**: Drift detection and performance tracking
+- **Deep Learning**: Test neural networks for complex pattern detection
+- **Containerization**: Docker deployment for easier scaling
+- **Database Integration**: PostgreSQL/MySQL for prediction history
 
-This project is created for **educational purposes**.
-
-**Usage Terms:**
-- ✅ Free to use for learning
-- ✅ Free to modify and extend
-- ✅ Free to use in personal projects
-- ⚠️ Commercial use: Contact author
-- ⚠️ Dataset: Subject to original license
-
-**Disclaimer:**
-This software is provided "as is" without warranty of any kind. Use at your own risk.
 
 ---
 
 ## 🙏 Acknowledgments
 
-### Dataset
-- **Source**: Telco Customer Churn Dataset
-- **Provider**: IBM Sample Data Sets
-- **License**: Public domain for educational use
-
-### Libraries & Frameworks
-- **scikit-learn**: Machine learning algorithms
-- **FastAPI**: Modern web framework
-- **Streamlit**: Interactive dashboards
-- **XGBoost**: Gradient boosting library
-- **Plotly**: Interactive visualizations
-
-### Inspiration
-- Kaggle community for ML techniques
-- FastAPI community for API best practices
-- Streamlit community for dashboard ideas
-
-### Contributors
-- EL MIZ NIAMA - Initial work and improvements
-
-
-### Special Thanks
-- All open-source contributors
-- The Python community
-- Everyone who provided feedback
-
----
-
-## 📈 Project Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Lines of Code** | ~3,500 |
-| **Functions** | 45+ |
-| **API Endpoints** | 5 |
-| **Model Accuracy** | 85-87% |
-| **Features Engineered** | 6 new |
-| **Documentation Pages** | 4 |
-| **Total Features Used** | 36 |
-| **Training Samples** | 7,043 |
-
----
-
-## 🎯 Quick Links
-
-### Documentation
-- [Installation Guide](#-installation)
-- [Usage Guide](#-usage-guide)
-- [API Documentation](#-api-documentation)
-- [Model Performance](#-model-performance)
-
-### Code
-- [Notebooks](./notebooks/)
-- [Backend](./backend_improved.py)
-- [Frontend](./frontend_improved.py)
-- [Improvements](./ameliorations_code.py)
-
-### Resources
-- [API Swagger UI](http://localhost:8000/docs)
-- [Dashboard](http://localhost:8501)
-- [Dataset](./Customer-Churn.csv)
-
----
-
-## 🔍 Keywords
-
-`machine learning` `customer churn` `predictive analytics` `telecommunications` `fastapi` `streamlit` `random forest` `xgboost` `ensemble learning` `python` `data science` `customer retention` `business intelligence` `ml pipeline` `rest api` `interactive dashboard` `feature engineering` `hyperparameter tuning` `smote` `classification`
+- **Dataset**: Telco Customer Churn Dataset (Kaggle)
+- **Libraries**: scikit-learn, FastAPI, Streamlit, XGBoost communities
+- **Techniques**: SMOTE, GridSearchCV, Feature Engineering best practices
 
 ---
 
 <div align="center">
 
-## 💫 Built with Excellence
 
-**Customer Churn Prediction System v2.0**
-
-🐍 Python • 🤖 Machine Learning • 🚀 FastAPI • 🎨 Streamlit
-
----
-
-
-**Last Updated:** 2024  
-**Maintained by:** EL MIZ  Niama 
-**Status:** 🟢 Active Development
+**Version 2.0.0** | **Last Updated**: 2024
 
 </div>
-
