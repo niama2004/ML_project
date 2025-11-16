@@ -1,20 +1,5 @@
 # 📊 Customer Churn Prediction System
 
-<div align="center">
-
-**A comprehensive machine learning solution for predicting customer churn in telecommunications**
-
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)](https://fastapi.tiangolo.com/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)](https://streamlit.io/)
-[![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.3+-orange.svg)](https://scikit-learn.org/)
-
-**Version 2.0** | **Production Ready** | **With Smart Recommendations**
-
-</div>
-
----
-
 ## 🎯 Project Overview
 
 This project provides a complete end-to-end machine learning solution for predicting customer churn in the telecommunications industry. It includes:
@@ -679,25 +664,6 @@ Interactive API documentation available at:
 
 ---
 
-## 📝 Notes & Limitations
-
-### Model Limitations
-
-- Trained on historical data - may not capture future trends
-- Assumes similar customer behavior patterns
-- Requires retraining with new data periodically
-- Results specific to telecom industry
-
-### Best Practices
-
-- Always validate input data before prediction
-- Monitor model performance over time
-- Retrain model with new data regularly
-- Use predictions as one input among many business factors
-- Adjust business costs in recommendations based on your context
-
----
-
 ## 👥 Contributing
 
 This is a learning project, but suggestions and improvements are welcome!
@@ -723,12 +689,7 @@ This project is for educational purposes. The dataset is publicly available.
 
 ---
 
-## 📧 Support
 
-For questions or feedback:
-- Check the documentation files
-- Review the API documentation at `/docs`
-- Open an issue for bugs or feature requests
 
 ---
 
@@ -741,5 +702,6 @@ For questions or feedback:
 [⬆ Back to Top](#-customer-churn-prediction-system)
 
 </div>
-#   M L _ p r o j e c t _ 1  
+#   M L _ p r o j e c t _ 1 
+ 
  
