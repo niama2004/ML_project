@@ -1009,51 +1009,6 @@ Have an idea? We'd love to hear it! Include:
 
 ---
 
-## ❓ FAQ
-
-### General Questions
-
-**Q: Do I need to provide all 18 features?**
-A: No! Version 2.0 only requires 6 critical features. All others have sensible defaults.
-
-**Q: Can I use this for other industries?**
-A: Yes! The framework is adaptable. You'll need to retrain with your own data.
-
-**Q: What's the minimum Python version?**
-A: Python 3.8 or higher is required.
-
-**Q: Is this production-ready?**
-A: The core functionality is solid, but you should add authentication, monitoring, and testing for production use.
-
-### Technical Questions
-
-**Q: Why is the optimal threshold 0.45 instead of 0.5?**
-A: The threshold is optimized based on the data to balance precision and recall. A lower threshold catches more churners (higher recall) at the cost of some false positives.
-
-**Q: What's the difference between the original and improved models?**
-A: The improved model has better preprocessing, feature engineering, hyperparameter tuning, and uses an ensemble approach. See the [Version Comparison](#version-comparison) section.
-
-**Q: How do I retrain the model with new data?**
-A: Open `ml1_improved.ipynb`, replace the dataset, and run all cells. The notebook will generate new model files.
-
-**Q: Can I add more features to the model?**
-A: Yes! Add them in the feature engineering section of the notebook and retrain.
-
-### API Questions
-
-**Q: What format should my batch CSV be in?**
-A: See the [Batch Prediction](#batch-prediction) section for the exact format.
-
-**Q: How do I handle API errors?**
-A: The API returns detailed error messages. Check the response status code and message.
-
-**Q: Is there rate limiting on the API?**
-A: Not currently, but you should implement it for production use.
-
-**Q: Can I deploy this API to the cloud?**
-A: Yes! It works with AWS, Azure, GCP, or Heroku. Docker support is planned for v2.1.
-
----
 
 ## 📊 Performance Benchmarks
 
@@ -1273,26 +1228,6 @@ git push heroku main
 
 ---
 
-## 📞 Support
-
-### Getting Help
-
-**Documentation:**
-- Start with this README
-- Check the usage guide (GUIDE_UTILISATION_IMPROVED.md)
-- Review API docs at http://localhost:8000/docs
-
-**Community:**
-- Create an issue for bugs or questions
-- Check existing issues first
-- Provide detailed information
-
-**Contact:**
-- 📧 Email: [Your email here]
-- 💼 LinkedIn: [Your profile]
-- 🐙 GitHub: [Your GitHub]
-
----
 
 ## 📜 License
 
@@ -1330,8 +1265,8 @@ This software is provided "as is" without warranty of any kind. Use at your own 
 - Streamlit community for dashboard ideas
 
 ### Contributors
-- [Your Name] - Initial work and improvements
-- [Contributors list if any]
+- EL MIZ NIAMA - Initial work and improvements
+
 
 ### Special Thanks
 - All open-source contributors
@@ -1392,14 +1327,10 @@ This software is provided "as is" without warranty of any kind. Use at your own 
 
 ---
 
-### ⭐ If you find this project helpful, please give it a star!
-
-[⬆ Back to Top](#-customer-churn-prediction-system)
-
----
 
 **Last Updated:** 2024  
-**Maintained by:** [Your Name]  
+**Maintained by:** EL MIZ  Niama 
 **Status:** 🟢 Active Development
 
 </div>
+
