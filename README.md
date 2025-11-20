@@ -1,3 +1,4 @@
+
 # 📊 Customer Churn Prediction System
 
 <div align="center">
@@ -20,7 +21,7 @@
 This project implements an end-to-end machine learning pipeline for predicting customer churn in telecommunications. The system uses optimized preprocessing, feature engineering, and ensemble methods to achieve high prediction accuracy while providing actionable business recommendations.
 
 **Key Features:**
-- **Simplified Input**: Only 6 critical features required (reduced from 18)
+- **Simplified Input**: Only 6 critical features required (reduced from 21)
 - **Smart Recommendations**: Automatic actionable suggestions to reduce churn risk
 - **Production-Ready API**: FastAPI backend with comprehensive validation
 - **Interactive Dashboard**: Streamlit frontend for non-technical users
@@ -180,14 +181,6 @@ df['TotalCharges'] = df['TotalCharges'].fillna(0)
   - Generates synthetic samples along line segments connecting neighbors
   - Creates balanced dataset without losing information
 
-**Implementation**:
-```python
-from imblearn.over_sampling import SMOTE
-smote = SMOTE(random_state=42)
-X_train_balanced, y_train_balanced = smote.fit_resample(X_train_scaled, y_train)
-```
-
-**Result**: Balanced dataset with 4,139 samples per class
 
 **Why this order matters**:
 1. Split train/test (80/20) - prevents data leakage
@@ -246,11 +239,7 @@ X_train_balanced, y_train_balanced = smote.fit_resample(X_train_scaled, y_train)
      - `subsample=1.0`: Use all samples (no subsampling needed with regularization)
      - `scale_pos_weight=2`: Adjusts for class imbalance
 
-**Why not Neural Networks?**
-- Tabular data: Tree-based models typically outperform neural networks
-- Interpretability: Business stakeholders need to understand predictions
-- Training time: Faster training and inference
-- Data size: 7,043 samples may be insufficient for deep learning
+
 
 #### 2.2 Hyperparameter Tuning
 
@@ -266,29 +255,7 @@ X_train_balanced, y_train_balanced = smote.fit_resample(X_train_scaled, y_train)
     - Measures ability to distinguish between classes at all thresholds
     - More informative than accuracy for classification
 
-**Grid Search Spaces:**
 
-**Random Forest** (64 combinations):
-```python
-{
-    'n_estimators': [100, 200],
-    'max_depth': [15, 20, 25, None],
-    'min_samples_split': [2, 5],
-    'min_samples_leaf': [1, 2],
-    'class_weight': ['balanced', None]
-}
-```
-
-**XGBoost** (48 combinations):
-```python
-{
-    'n_estimators': [100, 200],
-    'max_depth': [3, 5, 7],
-    'learning_rate': [0.01, 0.1],
-    'subsample': [0.8, 1.0],
-    'scale_pos_weight': [1, 2]
-}
-```
 
 **Results:**
 - Random Forest CV AUC: **0.9266**
@@ -576,28 +543,6 @@ curl -X POST "http://localhost:8000/predict" \
 - **Containerization**: Docker deployment for easier scaling
 - **Database Integration**: PostgreSQL/MySQL for prediction history
 
----
-
-## 📚 Project Structure
-
-```
-copie-ml/
-├── 📓 Notebooks
-│   ├── ml1.ipynb                      # Original pipeline
-│   └── ml1_improved.ipynb            # Optimized pipeline ⭐
-├── 🔧 Backend
-│   └── backend_improved.py           # FastAPI server ⭐
-├── 🎨 Frontend
-│   └── frontend_improved.py          # Streamlit dashboard ⭐
-├── 📊 Data & Models
-│   ├── Customer-Churn.csv            # Dataset
-│   ├── churn_prediction_model_improved.pkl
-│   ├── scaler_improved.pkl
-│   ├── feature_columns_improved.pkl
-│   └── optimal_threshold.pkl
-└── ⚙️ Configuration
-    └── requirements.txt
-```
 
 ---
 
@@ -611,8 +556,8 @@ copie-ml/
 
 <div align="center">
 
-**Built with ❤️ using Python, FastAPI, Streamlit, and Scikit-learn**
 
 **Version 2.0.0** | **Last Updated**: 2024
 
 </div>
+>>>>>>> 57ef5e840605cc4be0b0fb6333dc04d845b8d252
